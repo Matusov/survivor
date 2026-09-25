@@ -16,9 +16,13 @@ Episode results are entered manually: **S**urvived / **I**mmunity / **R**eward, 
 for the episode a castaway is voted out. Final 3 and Winner bonuses at season's end.
 Commissioner tools sit behind a 4-digit PIN (a convenience lock, not real security).
 
-## Icons
-`icons/survivor-icon-{120,152,167,180,192,512,1024}.png` — flat **RGB (no alpha channel)** on
-pure black, covering every iOS `apple-touch-icon` size plus the Android/PWA sizes.
+## Icons and caching
+Icons are flat **RGB (no alpha channel)** on pure black, at every iOS size. They are served under
+**content-hashed filenames** (`icons/apple-touch-icon-<version>-<size>.png`) so iOS can never reuse a
+stale home-screen icon after an update. `favicon.ico` is a real multi-resolution ICO.
+
+If an old icon still appears on an existing home-screen shortcut, delete that shortcut and re-add it —
+iOS caches home-screen artwork per shortcut and does not refresh it.
 
 ## Disclaimer
 

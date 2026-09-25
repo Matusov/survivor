@@ -9,11 +9,16 @@
 <meta name="apple-mobile-web-app-title" content="S51 Fantasy">
 <meta name="description" content="Survivor 51 Fantasy League — Matusov vs O'Brien">
 <link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/png" href="icons/survivor-icon-192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/survivor-icon-180.png">
-<link rel="apple-touch-icon" sizes="167x167" href="icons/survivor-icon-167.png">
-<link rel="apple-touch-icon" sizes="152x152" href="icons/survivor-icon-152.png">
-<link rel="apple-touch-icon" sizes="120x120" href="icons/survivor-icon-120.png">
+<link rel="apple-touch-icon" sizes="120x120" href="icons/apple-touch-icon-202609251536-120.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icons/apple-touch-icon-202609251536-152.png">
+<link rel="apple-touch-icon" sizes="167x167" href="icons/apple-touch-icon-202609251536-167.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-202609251536-180.png">
+<link rel="apple-touch-icon" sizes="192x192" href="icons/apple-touch-icon-202609251536-192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="icons/apple-touch-icon-202609251536-512.png">
+<link rel="apple-touch-icon" sizes="1024x1024" href="icons/apple-touch-icon-202609251536-1024.png">
+<link rel="icon" type="image/png" sizes="1024x1024" href="icons/apple-touch-icon-202609251536-1024.png">
+<link rel="shortcut icon" href="icons/favicon-202609251536.ico">
+<link rel="icon" href="icons/favicon-202609251536.ico" sizes="any">
 <title>Survivor 51 Fantasy League</title>
 <style>
 :root{
@@ -53,7 +58,7 @@ main{flex:1;padding:14px 14px calc(96px + env(safe-area-inset-bottom));animation
   background:linear-gradient(180deg,rgba(8,11,16,.94),rgba(8,11,16,.66) 70%,rgba(8,11,16,0));
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
 }
-.torchimg{width:30px;height:30px;border-radius:9px;flex:none;box-shadow:0 0 14px rgba(255,122,41,.4)}
+.torch{font-size:23px;filter:drop-shadow(0 0 12px rgba(255,122,41,.75));animation:flame 2.6s ease-in-out infinite}
 @keyframes flame{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-2px) rotate(2deg)}}
 .brand h1{margin:0;font-size:16.5px;font-weight:800;letter-spacing:2.6px;line-height:1}
 .brand p{margin:2px 0 0;font-size:10.5px;color:var(--muted);letter-spacing:2.4px;text-transform:uppercase}
@@ -237,7 +242,7 @@ details[open] summary:after{transform:rotate(90deg)}
 <body>
 <div class="app">
   <header class="topbar">
-    <img class="torchimg" src="icons/survivor-icon-180.png" alt="">
+    <span class="torch">🔥</span>
     <div class="brand"><h1>SURVIVOR 51</h1><p>Fantasy League</p></div>
     <span class="spacer"></span>
     <span class="chip" id="topChip" style="display:none"></span>
