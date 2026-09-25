@@ -11,7 +11,6 @@
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" href="icons/survivor-icon-192.png">
 <link rel="apple-touch-icon" href="icons/survivor-icon-180.png">
-<link rel="apple-touch-icon" href="icon.svg">
 <title>Survivor 51 Fantasy League</title>
 <style>
 :root{
@@ -63,26 +62,14 @@ main{flex:1;padding:14px 14px calc(96px + env(safe-area-inset-bottom));animation
 h2.sec{font-size:12px;letter-spacing:2.4px;text-transform:uppercase;color:var(--muted);margin:22px 4px 10px;font-weight:750}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:15px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .card+.card{margin-top:10px}
-.hero{text-align:center;padding:30px 18px 26px;border-radius:24px;position:relative;overflow:hidden;
-  background:linear-gradient(165deg,rgba(255,122,41,.18),rgba(255,122,41,.04) 42%,rgba(255,255,255,.03));
+.hero{text-align:center;padding:26px 18px 22px;border-radius:24px;position:relative;overflow:hidden;
+  background:linear-gradient(165deg,rgba(255,122,41,.20),rgba(255,122,41,.05) 42%,rgba(255,255,255,.03));
   border:1px solid rgba(255,122,41,.26)}
-.hero-bg{position:absolute;inset:-14%;z-index:0;pointer-events:none;
-  background:url(hero-bg.jpg) center 34%/cover no-repeat;
-  filter:blur(17px) saturate(1.25) brightness(.82);transform:scale(1.2)}
-.hero-ov{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(8,11,16,.72) 0%,rgba(8,11,16,.38) 46%,rgba(8,11,16,.70) 100%),
-             radial-gradient(115% 78% at 50% 0%,rgba(255,122,41,.24),transparent 66%)}
-.hero-in{position:relative;z-index:2}
-.hero h2{text-shadow:0 2px 20px rgba(0,0,0,.55)}
-.hero .k,.hero .sub{text-shadow:0 1px 12px rgba(0,0,0,.7)}
+.hero:after{content:"";position:absolute;inset:-40% -10% auto;height:70%;background:radial-gradient(closest-side,rgba(255,187,99,.28),transparent);pointer-events:none}
 .hero .k{font-size:10.5px;letter-spacing:3.4px;color:var(--torch2);text-transform:uppercase;font-weight:750}
 .hero h2{margin:8px 0 4px;font-size:30px;font-weight:900;letter-spacing:1px;line-height:1.02}
 .hero h2 em{font-style:normal;background:linear-gradient(92deg,var(--torch),var(--torch2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero .sub{color:#d8e0ea;font-size:12px;letter-spacing:.4px}
-.slogan{display:flex;flex-direction:column;margin:11px 0 9px}
-.slogan span{font-size:18px;font-weight:900;letter-spacing:8px;line-height:1.14;text-transform:uppercase;
-  background:linear-gradient(92deg,#ff9a3d 0%,#ffd79a 55%,#ff9a3d 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
-  filter:drop-shadow(0 2px 10px rgba(0,0,0,.7))}
+.hero .sub{color:var(--muted);font-size:12px;letter-spacing:.4px}
 .row{display:flex;align-items:center;gap:10px}
 .between{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .muted{color:var(--muted)}.dim{color:var(--dim)}.small{font-size:12px}.tiny{font-size:11px}
@@ -359,11 +346,9 @@ function home(v){
     PLAYERS.filter(p=>p.f===f).map(p=>'<div class="pl"><span>'+esc(p.n)+'</span><span class="s" style="color:var(--'+(f==='Matusov'?'mat':'obr')+')">'+pTotal(p.n)+'</span></div>').join('')+
     '</div>').join('');
   v.innerHTML =
-  '<section class="hero"><div class="hero-bg" aria-hidden="true"></div><div class="hero-ov" aria-hidden="true"></div><div class="hero-in">'+
-    '<div class="k">The Open Era</div>'+
-    '<div class="slogan"><span>Outwit</span><span>Outplay</span><span>Outlast</span></div>'+
-    '<h2>SURVIVOR <em>51</em></h2>'+
-    '<div class="sub">Matusov vs O\'Brien &nbsp;•&nbsp; Premiered Sept 23, 2026</div></div></section>'+
+  '<section class="hero">'+
+    '<div class="k">The Open Era</div><h2>SURVIVOR <em>51</em></h2>'+
+    '<div class="sub">Matusov vs O\'Brien &nbsp;•&nbsp; Premiered Sept 23, 2026</div></section>'+
   '<h2 class="sec">👥 Teams</h2><div class="teams">'+teams+'</div>'+
   '<h2 class="sec">⚔️ Family Showdown</h2>'+
   '<div class="card"><div class="show">'+

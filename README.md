@@ -3,7 +3,7 @@
 A mobile-first, dark-themed fantasy league tracker for **Survivor 51 (The Open Era)** —
 Matusov vs O'Brien.
 
-Open it on your phone, tap **Share → Add to Home Screen**, and it runs full-screen like an app.
+Open on your phone → **Share → Add to Home Screen** to run it full-screen.
 
 ## Tabs
 - **Home** — Teams scores, family showdown, rules, scoring
@@ -11,12 +11,10 @@ Open it on your phone, tap **Share → Add to Home Screen**, and it runs full-sc
 - **Picks** — 3 picks per player; locks automatically Wed Sep 30, 7:59 PM ET
 - **Scores** — leaderboard + commissioner tools (PIN-protected)
 
-Picks and scores are stored in your browser's local storage, with JSON export/import.
-
 ## Commissioner
 Episode results are entered manually: **S**urvived / **I**mmunity / **R**eward, plus **OUT**
 for the episode a castaway is voted out. Final 3 and Winner bonuses at season's end.
-Commissioner tools are behind a 4-digit PIN (a convenience lock, not real security).
+Commissioner tools sit behind a 4-digit PIN (a convenience lock, not real security).
 
 ## Disclaimer
 
