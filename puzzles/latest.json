@@ -1,0 +1,137 @@
+{
+  "date": "2026-09-25",
+  "source": "tryhardguides+realqunb",
+  "sourceUrl": "https://tryhardguides.com/nyt-mini-crossword-september-25-2026-answers/",
+  "grid": [
+    [
+      "P",
+      "E",
+      "T",
+      "S",
+      ""
+    ],
+    [
+      "E",
+      "X",
+      "I",
+      "T",
+      ""
+    ],
+    [
+      "A",
+      "T",
+      "B",
+      "A",
+      "T"
+    ],
+    [
+      "C",
+      "R",
+      "E",
+      "T",
+      "E"
+    ],
+    [
+      "H",
+      "A",
+      "T",
+      "E",
+      "D"
+    ]
+  ],
+  "blocked": [
+    [
+      0,
+      4
+    ],
+    [
+      1,
+      4
+    ]
+  ],
+  "size": 5,
+  "clues": {
+    "across": [
+      {
+        "num": 1,
+        "row": 0,
+        "col": 0,
+        "clue": "dogs and cats or less commonly frogs and rats",
+        "answer": "PETS"
+      },
+      {
+        "num": 5,
+        "row": 1,
+        "col": 0,
+        "clue": "highway off ramp",
+        "answer": "EXIT"
+      },
+      {
+        "num": 6,
+        "row": 2,
+        "col": 0,
+        "clue": "chance to hit a homer",
+        "answer": "ATBAT"
+      },
+      {
+        "num": 8,
+        "row": 3,
+        "col": 0,
+        "clue": "largest island of greece",
+        "answer": "CRETE"
+      },
+      {
+        "num": 9,
+        "row": 4,
+        "col": 0,
+        "clue": "strongly disliked",
+        "answer": "HATED"
+      }
+    ],
+    "down": [
+      {
+        "num": 1,
+        "row": 0,
+        "col": 0,
+        "clue": "fruit on a georgia license plate",
+        "answer": "PEACH"
+      },
+      {
+        "num": 2,
+        "row": 0,
+        "col": 1,
+        "clue": "the e of esp",
+        "answer": "EXTRA"
+      },
+      {
+        "num": 3,
+        "row": 0,
+        "col": 2,
+        "clue": "region on the north side of mount everest",
+        "answer": "TIBET"
+      },
+      {
+        "num": 4,
+        "row": 0,
+        "col": 3,
+        "clue": "governors responsibility",
+        "answer": "STATE"
+      },
+      {
+        "num": 7,
+        "row": 2,
+        "col": 4,
+        "clue": "danson of the good place",
+        "answer": "TED"
+      }
+    ]
+  },
+  "verified": true,
+  "confidence": "medium",
+  "fetchedAt": "2026-09-25T09:45:05.544657+00:00",
+  "allSourcesAgreed": true,
+  "sourceDetails": {
+    "tryhardguides": "scraped",
+    "realqunb": "scraped"
+  }
+}
