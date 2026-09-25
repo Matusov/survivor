@@ -9,16 +9,16 @@
 <meta name="apple-mobile-web-app-title" content="S51 Fantasy">
 <meta name="description" content="Survivor 51 Fantasy League — Matusov vs O'Brien">
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" sizes="120x120" href="icons/apple-touch-icon-202609251536-120.png">
-<link rel="apple-touch-icon" sizes="152x152" href="icons/apple-touch-icon-202609251536-152.png">
-<link rel="apple-touch-icon" sizes="167x167" href="icons/apple-touch-icon-202609251536-167.png">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-202609251536-180.png">
-<link rel="apple-touch-icon" sizes="192x192" href="icons/apple-touch-icon-202609251536-192.png">
-<link rel="apple-touch-icon" sizes="512x512" href="icons/apple-touch-icon-202609251536-512.png">
-<link rel="apple-touch-icon" sizes="1024x1024" href="icons/apple-touch-icon-202609251536-1024.png">
-<link rel="icon" type="image/png" sizes="1024x1024" href="icons/apple-touch-icon-202609251536-1024.png">
-<link rel="shortcut icon" href="icons/favicon-202609251536.ico">
-<link rel="icon" href="icons/favicon-202609251536.ico" sizes="any">
+<link rel="apple-touch-icon" sizes="120x120" href="icons/apple-touch-icon-202609251541-120.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icons/apple-touch-icon-202609251541-152.png">
+<link rel="apple-touch-icon" sizes="167x167" href="icons/apple-touch-icon-202609251541-167.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-202609251541-180.png">
+<link rel="apple-touch-icon" sizes="192x192" href="icons/apple-touch-icon-202609251541-192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="icons/apple-touch-icon-202609251541-512.png">
+<link rel="apple-touch-icon" sizes="1024x1024" href="icons/apple-touch-icon-202609251541-1024.png">
+<link rel="icon" type="image/png" sizes="1024x1024" href="icons/apple-touch-icon-202609251541-1024.png">
+<link rel="shortcut icon" href="icons/favicon-202609251541.ico">
+<link rel="icon" href="icons/favicon-202609251541.ico" sizes="any">
 <title>Survivor 51 Fantasy League</title>
 <style>
 :root{
@@ -246,6 +246,7 @@ details[open] summary:after{transform:rotate(90deg)}
     <div class="brand"><h1>SURVIVOR 51</h1><p>Fantasy League</p></div>
     <span class="spacer"></span>
     <span class="chip" id="topChip" style="display:none"></span>
+    <span class="chip savechip" id="saveChip" title="Picks and scores are saved on this device">✓ Saved</span>
   </header>
   <main id="view"></main>
 </div>
@@ -288,13 +289,51 @@ function defaultState(){
   return {v:1,locked:false,picks,eps,tab:'home'};
 }
 let state = defaultState();
-function load(){
-  try{ const raw=JSON.parse(localStorage.getItem('s51')||'null'); if(raw){ state=Object.assign(defaultState(),raw); } }catch(e){}
-  // repair / migrate
-  PLAYERS.forEach(p=>{ if(!Array.isArray(state.picks[p.n])||state.picks[p.n].length!==3) state.picks[p.n]=[null,null,null]; });
-  CAST.forEach(c=>{ const d=state.eps[c.name]; if(!d||!Array.isArray(d.e)||d.e.length!==NEP){ state.eps[c.name]={e:Array.from({length:NEP},()=>({s:false,i:false,r:false,out:false})),f3:!!(d&&d.f3),win:!!(d&&d.win)}; }});
+function sanitize(st){
+  PLAYERS.forEach(p=>{ if(!Array.isArray(st.picks[p.n])||st.picks[p.n].length!==3) st.picks[p.n]=[null,null,null]; });
+  CAST.forEach(c=>{ const d=st.eps[c.name]; if(!d||!Array.isArray(d.e)||d.e.length!==NEP){ st.eps[c.name]={e:Array.from({length:NEP},()=>({s:false,i:false,r:false,out:false})),f3:!!(d&&d.f3),win:!!(d&&d.win)}; }});
+  return st;
 }
-function save(){ try{ localStorage.setItem('s51',JSON.stringify(state)); }catch(e){} }
+function readSlot(key){
+  try{
+    const raw = localStorage.getItem(key);
+    if(!raw) return null;
+    const obj = JSON.parse(raw);
+    const sig = localStorage.getItem(key+'_sig');
+    if(sig && checksum(raw) !== sig) return {__bad:true};
+    return obj;
+  }catch(e){ return {__bad:true}; }
+}
+function load(){
+  const primary = readSlot('s51');
+  if(primary && !primary.__bad){ state = sanitize(Object.assign(defaultState(), primary)); return; }
+  const backup = readSlot('s51_backup');
+  if(backup && !backup.__bad){ state = sanitize(Object.assign(defaultState(), backup)); return; }
+  state = defaultState();
+}
+let lastSaveOK = true;
+function checksum(str){ let h=5381; for(let i=0;i<str.length;i++){ h=((h<<5)+h+str.charCodeAt(i))>>>0; } return h.toString(36); }
+function flagSave(ok, why){
+  const c = document.getElementById('saveChip');
+  if(!c) return;
+  if(ok){ c.textContent = '✓ Saved'; c.style.color=''; c.style.borderColor=''; c.title='Picks and scores are saved on this device'; }
+  else { c.textContent = '⚠ Not saved'; c.style.color='var(--bad)'; c.style.borderColor='rgba(248,113,113,.5)';
+         c.title='This browser is blocking storage ('+why+'). Export JSON, or ask for a reduced-storage mode.'; }
+}
+function writeSlot(key, st){
+  const json = JSON.stringify(st);
+  try{ localStorage.setItem(key, json); localStorage.setItem(key+'_sig', checksum(json)); return true; }catch(e){ return false; }
+}
+function save(){
+  const json = JSON.stringify(state);
+  let ok = true, why = '';
+  try{ localStorage.setItem('s51', json); localStorage.setItem('s51_sig', checksum(json)); }
+  catch(e){ ok = false; why = (e && e.name) || 'error'; }
+  lastSaveOK = ok;
+  if(ok){ clearTimeout(save._b); save._b = setTimeout(()=>{ writeSlot('s51_backup', state); }, 1500); }
+  flagSave(ok, why);
+  return ok;
+}
 
 /* ---------- scoring ---------- */
 const epPts = x => (x.s?1:0)+(x.i?2:0)+(x.r?1:0);
@@ -637,7 +676,11 @@ function openSheet(title, mount, big){
 function closeSheet(){ $('#sw').classList.remove('on'); }
 
 /* ---------- boot ---------- */
-load(); save(); render();
+load();
+if(!save()){ toast('⚠ Storage blocked — picks will not persist. Export JSON to be safe.'); }
+else { setTimeout(()=>writeSlot('s51_backup', state), 200); }
+render();
+window.addEventListener('beforeunload', ()=>{ try{ save() }catch(e){} });
 window.addEventListener('keydown',e=>{ if(e.key==='Escape') closeSheet(); });
 </script>
 </body>
